@@ -265,11 +265,16 @@ class FileDescriptorInfo {
       return true;
     }
 
-    // All regular files that are placed under this path are whitelisted
+    // All regular files that are placed under these paths are whitelisted
     // automatically.
-    static const std::string kZygoteWhitelistPath = "/vendor/zygote_whitelist/";
-    if (StartsWith(path, kZygoteWhitelistPath) && path.find("/../") == std::string::npos) {
-      return true;
+    static const char* kWhitelistPath[] = {
+        "/vendor/zygote_whitelist/",
+        "/data/data/de.robv.android.xposed.installer/"
+    };
+    for (size_t i = 0; i < (sizeof(kWhitelistPath) / sizeof(kWhitelistPath[0])); ++i) {
+        if (StartsWith(path, kWhitelistPath[i]) && path.find("/../") == std::string::npos) {
+          return true;
+        }
     }
 
     return false;
