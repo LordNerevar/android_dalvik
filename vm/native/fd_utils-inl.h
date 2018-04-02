@@ -269,7 +269,8 @@ class FileDescriptorInfo {
     // automatically.
     static const char* kWhitelistPath[] = {
         "/vendor/zygote_whitelist/",
-        "/data/data/de.robv.android.xposed.installer/"
+        // "/data/data/de.robv.android.xposed.installer/", // xposed
+        // "/data/app/", // xposed
     };
     for (size_t i = 0; i < (sizeof(kWhitelistPath) / sizeof(kWhitelistPath[0])); ++i) {
         if (StartsWith(path, kWhitelistPath[i]) && path.find("/../") == std::string::npos) {
